@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+homebrew = "*"
+mysqlclient = "*"
+psycopg2-binary = "*"
+pillow = "*"
+bcrypt = "*"
+python-decouple = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

@@ -1,0 +1,43 @@
+{% extends 'posts/layouts/base.html' %}
+
+{% block title %}Update post{% endblock title %}
+
+{% block body %}
+    <h3 class='text-center'>Update page</h3>
+    <div class='container-fluid'>
+        <div class='row'>
+            <div class='col-md-8 mx-auto'>
+                <form action="" method="post" enctype='multipart/form-data'>
+                    {% if form.subject.errors %}
+                        {% for error in form.subject.errors %}
+                            <p class='text-danger'><strong>{{ error }}</strong></p>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    {% for field in form  %}
+                        <div class="form-group mb-2">
+                            <strong>{{ field.label_tag }}</strong>{% if field.field.required %}
+                                <span class=required>*</span>
+                            {% endif %}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class='help'>{{ field.help_text }}</small>
+                            {% endif %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <p class='text-danger'><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                            {% if field.name == 'image' %}
+                                <img src="{{ post.image.url }}" class='card-img-bottom mb-3' >
+                            {% endif %}
+                            
+                        </div>
+                    {% endfor %}
+                    <input name="" id="" class="btn btn-info mb-2" type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+        <div class='col-md-4'></div>
+    </div>
+{% endblock body %}

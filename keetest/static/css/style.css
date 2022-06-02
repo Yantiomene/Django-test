@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html, body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar{
+    background-image: linear-gradient(to left, #5ac5e8, #47b2d8);
+}
+
+.btn-primary{
+    background-image: linear-gradient(to left, #e37028, #ea7120);
+    border: none;
+}
+
+/*.footer{
+    background-image: linear-gradient(to left, #5ac5e8, #47b2d8);;
+}*/
+

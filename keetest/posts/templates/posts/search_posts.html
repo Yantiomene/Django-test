@@ -1,0 +1,36 @@
+{% extends 'posts/layouts/base.html' %}
+
+{% block title %}
+	Posts find
+{% endblock title %}
+
+{% block body %}
+
+	<h3 class='text-center'>{{ message }}</h3>
+    <div class="row row-cols-md-3 row-cols-sm-2">
+        {% for post in posts %}
+            <div class="col-sm-6">
+                <div class="custom-card card mb-3 shadow" style='width: 18rem;'>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class='card-img-top' alt='HELLO' style='height: 15rem;'> 
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ post.title }} </h5>
+                        <p class="card-text">{{ post.content|truncatechars:"50" }}</p>
+                        <a href="{% url 'posts:details' post.id %}" class="btn btn-primary">More</a>
+                        {% if post.user == request.user %}
+                            <a href="{% url 'posts:update_post' post.id %}" class="btn btn-info">Update</a>
+                            <a href="{% url 'posts:delete_post' post.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                        
+                    </div>
+                    <div class='card-footer'>
+                        Created by @{{ post.user.username }}
+                    </div>
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+
+{% endblock body %}

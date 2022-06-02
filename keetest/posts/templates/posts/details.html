@@ -1,0 +1,29 @@
+{% extends 'posts/layouts/base.html' %}
+
+{% block title %}
+	Details
+{% endblock title %}
+
+{% block body %}
+
+	<h1>Details</h1>
+	<div class="card">
+		{% if post.image %}
+			<img src="{{ post.image.url }}" class='card-img-top' alt='HELLO'> 
+		{% endif %}
+		<div class="card-header">  
+			{{ post.title }} 
+		</div>
+		<div class="card-body">
+			<p class="card-text">{{post.content}}</p>
+		</div>
+		<div class='card-footer'>
+			{% if post.user ==request.user %}
+				<a href="{% url 'posts:update_post' post.id %}" class="btn btn-info">Update</a>
+				<a href="{% url 'posts:delete_post' post.id %}" class="btn btn-danger">Delete</a>
+			{% endif %}
+			
+		</div>
+	</div>
+
+{% endblock body %}

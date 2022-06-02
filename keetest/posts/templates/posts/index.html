@@ -1,0 +1,65 @@
+{% extends 'posts/layouts/base.html' %}
+
+{% block title %}
+	Home
+{% endblock title %}
+
+{% block body %}
+
+	<h1>KEECASH</h1>
+	<div>
+		<h3 class="text-center mb-4 shadow bg-info">  {{ message }} </h3>
+
+		<div class="row row-cols-md-3 row-cols-sm-2">
+			{% for post in posts %}
+				<div class="col-sm-6">
+					<div class="custom-card card mb-3 shadow" style='width: 18rem;'>
+						{% if post.image %}
+							<img src="{{ post.image.url }}" class='card-img-top' alt='HELLO' style='height: 15rem;'> 
+						{% endif %}
+						
+						<div class="card-body">
+							<h5 class="card-title"> {{ post.title }} </h5>
+							<p class="card-text">{{ post.content|truncatechars:"50" }}</p>
+							<a href="{% url 'posts:details' post.id %}" class="btn btn-primary">More</a>
+							{% if post.user == request.user %}
+								<a href="{% url 'posts:update_post' post.id %}" class="btn btn-info">Update</a>
+								<a href="{% url 'posts:delete_post' post.id %}" class="btn btn-danger">Delete</a>
+							{% endif %}
+							
+						</div>
+						<div class='card-footer'>
+							Created by @{{ post.user.username }}
+						</div>
+					</div>
+				</div>
+			{% endfor%}
+		</div>
+	</div>
+
+	<nav>
+		<ul class='pagination justify-content-center'>
+			{% if posts.has_previous %}
+				<li class='page_item'>
+					<a class="page-link" href="?page={{ posts.previous_page_number }}">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+			{% endif %}
+			<li class="page-item">
+				<p class="page-link text-muted">
+					{{ posts.number }} of {{ posts.paginator.num_pages }}.
+				</p>
+			</li>
+			{% if posts.has_next %}
+				<li class='page_item'>
+					<a class="page-link" href="?page={{ posts.next_page_number }}">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			{% endif %}
+			
+		</ul>
+	</nav>
+
+{% endblock body %}
